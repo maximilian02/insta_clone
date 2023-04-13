@@ -1,12 +1,12 @@
 {
-  "name": "react-electron",
+  "name": "insta_clone",
   "version": "0.1.0",
-  "description": "Simple boilerplate for developing an Electron app with React",
-  "author": "willjw3",
+  "description": "Instagram clone challenge",
+  "author": "Max Zelarayán",
   "build": {
     "appId": "react.electron",
     "productName": "react-electron",
-    "mac":{
+    "mac": {
       "icon": "build/logo512.png",
       "target": "tar.gz"
     },
@@ -31,16 +31,29 @@
   "homepage": "./",
   "private": true,
   "dependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^18.15.11",
+    "@types/react": "^18.0.35",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
+    "autoprefixer": "^10.4.14",
     "cross-env": "^6.0.3",
     "electron-is-dev": "^1.1.0",
+    "postcss": "^8.4.21",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0"
+    "react-router": "^6.10.0",
+    "react-router-dom": "^6.10.0",
+    "react-scripts": "3.2.0",
+    "tailwindcss": "^3.3.1",
+    "typescript": "^5.0.4"
   },
   "scripts": {
-    "start-react": "react-scripts start",
-    "build-react": "react-scripts build",
+    "build:css": "postcss src/index.css -o public/output.css",
+    "watch:css": "postcss src/index.css -o public/output.css -w",
+    "start-react": "npm run watch:css & react-scripts start",
+    "build-react": "npm run build:css & react-scripts build",
     "test-react": "react-scripts test --env=jsdom",
     "eject-react": "react-scripts eject",
     "build-electron": "electron-builder",
@@ -66,6 +79,7 @@
     "concurrently": "^5.0.0",
     "electron": "^7.1.0",
     "electron-builder": "^22.1.0",
+    "postcss-cli": "^10.1.0",
     "wait-on": "^3.3.0"
   }
 }

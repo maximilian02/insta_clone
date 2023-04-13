@@ -9,7 +9,7 @@ import Authenticated from './pages/Authenticated';
 
 ReactDOM.render(
     <Router>
-        <div className="container bg-gray-800 min-h-screen">
+        <div className="xl:container bg-gray-800 min-h-screen w-full">
             <Routes>
                 <Route
                     path="/"

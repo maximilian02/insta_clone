@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React from 'react'
 
 interface CheckboxProps {
   label: string;
@@ -9,7 +9,6 @@ interface CheckboxProps {
 
 const Checkbox: React.FC<CheckboxProps> = ({ label, setRememberMe, value }) => {
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('remember me? ', e.target.checked);
     setRememberMe(e.target.checked)
   }
   return <>

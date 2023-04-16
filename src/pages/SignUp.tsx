@@ -1,6 +1,6 @@
 import React, { FormEvent, useState, useEffect } from 'react'
 import Button from '../components/Button'
-import FormLayout from './FormLayout'
+import DefaultLayout from './DefaultLayout'
 import DB from '../lib/DatabaseStorage'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
@@ -46,7 +46,7 @@ const SignUp: React.FC = () => {
   }, [username, password, password2])
 
   return <>
-    <FormLayout>
+    <DefaultLayout>
       <div className="flex flex-col justify-center flex-wrap content-center bg-gray-200 p-3 lg:w-4/12 w-10/12">
         <h1 className="text-3xl text-center font-bold mt-2">Create Account</h1>
         <form className="rounded px-8 pt-6 w-full" onSubmit={signInHandler}>
@@ -76,9 +76,9 @@ const SignUp: React.FC = () => {
           />
         </form>
 
-        <Button label="Sign in" type="secondary" onClick={signInHandler} disabled={submitDisable} />
+        <Button label="Sign in" type="secondary" extraStyle="self-end mr-8" onClick={signInHandler} disabled={submitDisable} />
       </div>
-    </FormLayout>
+    </DefaultLayout>
   </>
 }
 

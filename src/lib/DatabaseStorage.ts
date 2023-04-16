@@ -1,3 +1,6 @@
+import { PostType } from '../components/Post'
+import posts from '../lib/mockPosts'
+
 interface User {
   username: string;
   password?: string;
@@ -5,13 +8,19 @@ interface User {
 }
 
 interface DataBase {
-  users: User[];
+  users?: User[];
   session?: User | {}
+  posts?: PostType[]
 }
 
 const init = localStorage.getItem('store')
+const DUMMY_POSTS: PostType[] = [...posts]
+const sortedPosts = [...DUMMY_POSTS].sort((a, b) => Date.parse(b.uploadDate) - Date.parse(a.uploadDate))
+
+
 if (!init) {
   localStorage.setItem('store', JSON.stringify({ users: [] }))
+  localStorage.setItem('posts', JSON.stringify({ posts: sortedPosts }))
 }
 
 const get = (item: string) => {
@@ -38,11 +47,13 @@ const loginHandler = (username: string, password: string) => {
   let result = false
   const store = get('store')
 
-  for (let user of store.users) {
-    if (user.username === username && user.password === password) {
-      user.loggedIn = true
-      set('store', { users: [...store.users], session: { username: user.username, loggedIn: true } })
-      result = true
+  if (store && store.users) {
+    for (let user of store.users) {
+      if (user.username === username && user.password === password) {
+        user.loggedIn = true
+        set('store', { users: [...store.users], session: { username: user.username, loggedIn: true } })
+        result = true
+      }
     }
   }
 
@@ -66,10 +77,33 @@ const getSessionData = () => {
   return session
 }
 
+const getPosts = () => {
+  const { posts } = get('posts')
+  return [...posts]
+}
+
+const createPost = () => {
+  const { posts } = get('posts')
+  const dateNow = new Date()
+  const resultPosts = [
+    ...posts,
+    {
+      likedBy: [],
+      uploadDate: dateNow.toISOString(),
+      description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+      id: 222
+    }
+  ]
+
+  set('posts', { posts: [...resultPosts] })
+}
+
 export default {
-  getSessionData,
-  isSessionActive,
+  createPost,
   createUserHandler,
+  getSessionData,
+  getPosts,
+  isSessionActive,
   loginHandler,
   logOutHandler
 }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import Button from '../components/Button'
-import Checkbox from '../components/Checkbox'
-import FormLayout from './FormLayout'
-import DB from '../lib/DatabaseStorage'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import DB from '../lib/DatabaseStorage'
+import Button from '../components/Button'
+import Checkbox from '../components/Checkbox'
+import DefaultLayout from './DefaultLayout'
 
 const Login: React.FC = () => {
     const [submitDisable, setSubmitDisable] = useState(true)
@@ -29,6 +29,7 @@ const Login: React.FC = () => {
     const signInHandler = () => {
         const res = DB.loginHandler(username, password)
         if (!res) {
+            setPassword('')
             toast('User and password combination error')
         } else {
             navigate('/')
@@ -40,7 +41,7 @@ const Login: React.FC = () => {
     }, [username, password])
 
     return <>
-        <FormLayout>
+        <DefaultLayout>
             <div className="flex flex-col justify-center flex-wrap content-center bg-gray-200 p-3 lg:w-4/12 w-10/12">
                 <h1 className="text-3xl text-center font-bold mt-2">Login</h1>
                 <input
@@ -59,7 +60,7 @@ const Login: React.FC = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <Button label="Sign in" type="secondary" onClick={signInHandler} disabled={submitDisable} />
+                <Button label="Sign in" type="secondary" extraStyle="self-end" onClick={signInHandler} disabled={submitDisable} />
                 <Checkbox label="Remember me" value={rememberMe} setRememberMe={() => setRememberMe(!rememberMe)} />
 
                 <Button label="Sign in with facebook" type="facebook" onClick={signInHandler} />
@@ -67,7 +68,7 @@ const Login: React.FC = () => {
 
                 <Button label="Sign up" type="primary" onClick={goToSignUpHandler} />
             </div>
-        </FormLayout>
+        </DefaultLayout>
     </>
 }
 

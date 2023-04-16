@@ -1,10 +1,9 @@
 import React from 'react'
-
-export interface FormLayoutType {
+export interface DefaultLayoutType {
   children: any;
 }
 
-const FormLayout: React.FC<FormLayoutType> = ({ children }) =>
+const DefaultLayout: React.FC<DefaultLayoutType> = ({ children }) =>
   <>
     <div className="flex flex-col justify-center flex-wrap content-center min-h-screen w-full">
       {children}
@@ -12,4 +11,4 @@ const FormLayout: React.FC<FormLayoutType> = ({ children }) =>
   </>
 
 
-export default FormLayout
+export default DefaultLayout

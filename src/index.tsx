@@ -1,15 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import 'react-toastify/dist/ReactToastify.css'
 import { HashRouter as Router, Route, Routes } from 'react-router-dom'
-
+import { ToastContainer } from 'react-toastify'
 import Home from "./pages/Home"
 import Login from "./pages/Login"
-import Authenticated from './pages/Authenticated';
+import SignUp from './pages/SignUp'
+import Authenticated from './components/Authenticated'
+import CreatePost from './pages/CreatePost'
 
 ReactDOM.render(
     <Router>
-        <div className="container bg-gray-800 min-h-screen">
+        <ToastContainer />
+        <div className="bg-gray-800 min-h-screen w-full">
             <Routes>
                 <Route
                     path="/"
@@ -17,6 +21,17 @@ ReactDOM.render(
                         <Authenticated>
                             <Home />
                         </Authenticated>}
+                />
+                <Route
+                    path="/create-post"
+                    element={
+                        <Authenticated>
+                            <CreatePost />
+                        </Authenticated>}
+                />
+                <Route
+                    path="/signup"
+                    element={<SignUp />}
                 />
                 <Route
                     path="/login"

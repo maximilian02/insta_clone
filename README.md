@@ -7,3 +7,5 @@
 
 ## To start the app without electron
 - `npm run start-react`
+
+Node version while developing: `lts/gallium -> v16.20.0`
